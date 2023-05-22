@@ -1,7 +1,7 @@
 {
   "name": "front-end-final-project",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
