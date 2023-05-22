@@ -3,6 +3,7 @@
 ## Project Description
 
 Vue3 + Vite + TypeScript + Element Plus
+
 This repository draws inspiration from the design styles of HZNU and HISE official websites.
 
 ## Prerequisites
