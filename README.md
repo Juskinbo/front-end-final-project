@@ -1,22 +1,22 @@
 # front-end-final-project
 
-## Project Description
+This repo is the final project of the front-end interaction project entrepreneurial mode. The technology stack is Vue+Vite+TypeScript+ElementPlus+Axios+VueRouter.
 
-Vue3 + Vite + TypeScript + Element Plus
+## Usage
 
-This repository draws inspiration from the design styles of HZNU and HISE official websites.
+**Please notice to download the backend part of the project before using this repo.**
 
-## Prerequisites
+**[backend repo](https://github.com/Juskinbo/front-end-final-project-backend)**
 
-- Node.js
-- Git available
-
-## Install
-
-```sh
+```shell
 git clone https://github.com/Juskinbo/front-end-final-project.git
 cd front-end-final-project
 npm install
 npm run dev
 ```
 
+## Build
+
+```shell
+npm run build
+```
