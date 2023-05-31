@@ -1,9 +1,11 @@
 <template>
   <div class="article">
+    <el-image style="height: 10vh;width: 100%;" src="https://s2.loli.net/2023/05/31/Hwr4ARUaF1zjMGo.png">
+    </el-image>
     <h1>{{ data.article_title }}</h1>
     <p class="author">作者：{{ data.article_author }}</p>
     <p class="time">发布时间：{{ data.publish_time ? data.publish_time.substr(0, 10) : '' }}</p>
-    <p class="content">{{ data.article_content }}</p>
+    <pre class="content" v-html="data.article_content"></pre>
   </div>
 </template>
 <script setup lang="ts">
@@ -11,7 +13,6 @@
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import { ref } from 'vue'
-// 从global.d.ts获取Article类型
 // 初始化data，并且声明类型
 const data = ref<Article>({
   article_id: 0,
@@ -57,6 +58,10 @@ h1 {
 }
 
 .content {
+  font-size: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-align: justify;
+  /* max-width: 100px; */
+  white-space: pre-wrap;
 }
 </style>

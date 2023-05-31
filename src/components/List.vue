@@ -1,9 +1,13 @@
 <template>
   <div class="list">
     <div class="pagination-block">
+      <el-image style="height: 10vh;width: 100%;" src="https://s2.loli.net/2023/05/31/Hwr4ARUaF1zjMGo.png">
+      </el-image>
       <ul>
         <li class="article" v-for="o in list" :key="o.article_id">
-          <el-link :underline="false" :href="'/article' + o.article_id">{{ o.article_title }}</el-link>
+          <div class="title"><router-link :to="'/article' + o.article_id">{{ o.article_title }}</router-link>
+          </div>
+          <div class="time">{{ o.publish_time.substring(0, 10) }}</div>
         </li>
       </ul>
       <el-pagination layout="prev, pager, next" :total="total" :default-page-size="10" @current-change="pageChange" />
@@ -29,9 +33,6 @@ watch(
   () => route.params,
   (newValue, oldValue) => {
     list.value = []
-    // console.log(newValue)
-    // console.log(oldValue)
-    
     axios.get(url.baseUrl + "/list" + newValue.id).then((result) => {
       data.value = result.data
       // 获取data中的数据长度
@@ -68,8 +69,17 @@ const pageChange = (val: number) => {
 
 </script>
 <style scoped>
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 .el-pagination {
   justify-content: center;
+}
+
+.pagination-block {
+  width: 60%;
 }
 
 .pagination-block+.pagination-block {
@@ -81,8 +91,13 @@ const pageChange = (val: number) => {
 }
 
 .list {
-  text-align: center;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  align-items: center;
+  /* margin: 0 auto; */
+  justify-content: center;
+  height: 100%;
 }
 
 ul {
@@ -99,8 +114,27 @@ ul {
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  display: flex;
+  /* 鼠标悬浮 */
   /* border-bottom: 1px solid #ccc; */
   /* border-radius: 5px; */
   /* box-shadow: 0 0 10px #ccc; */
 }
+.title{
+  /* display: flex; */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 80%;
+}
+.time {
+  /* 靠右 */
+  margin-left: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #999;
+}
 </style>
+

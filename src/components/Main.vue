@@ -13,9 +13,9 @@
           <template #header>
             <div class="card-header">
               <span>新闻动态</span>
-              <el-button class="button" text>更多<el-icon>
-                  <ArrowRightBold />
-                </el-icon></el-button>
+              <router-link :to="'/list' + 15"><el-button class="button" text>更多<el-icon>
+                    <ArrowRightBold />
+                  </el-icon></el-button></router-link>
             </div>
           </template>
 
@@ -27,13 +27,13 @@
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card" :body-style="{ height: '306px', paddingTop: '0px' }">
+        <el-card class="box-card" :body-style="{ height: '326px', paddingTop: '0px' }">
           <template #header>
             <div class="card-header">
               <span>通知公告</span>
-              <el-button class="button" text>更多<el-icon>
-                  <ArrowRightBold />
-                </el-icon></el-button>
+              <router-link :to="'/list' + 16"><el-button class="button" text>更多<el-icon>
+                    <ArrowRightBold />
+                  </el-icon></el-button></router-link>
             </div>
           </template>
           <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
@@ -75,9 +75,9 @@
           <template #header>
             <div class="card-header">
               <span>科研成果</span>
-              <el-button class="button" text>更多<el-icon>
-                  <ArrowRightBold />
-                </el-icon></el-button>
+              <router-link :to="'/list' + 32"><el-button class="button" text>更多<el-icon>
+                    <ArrowRightBold />
+                  </el-icon></el-button></router-link>
             </div>
           </template>
           <div v-for="o in researches" :key="o.article_id" class="text item">
@@ -92,9 +92,9 @@
           <template #header>
             <div class="card-header">
               <span>学术动态</span>
-              <el-button class="button" text>更多<el-icon>
-                  <ArrowRightBold />
-                </el-icon></el-button>
+              <router-link :to="'/list' + 29"><el-button class="button" text>更多<el-icon>
+                    <ArrowRightBold />
+                  </el-icon></el-button></router-link>
             </div>
           </template>
           <div v-for="o in academics" :key="o.article_id" class="text item">
@@ -111,9 +111,9 @@
           <template #header>
             <div class="card-header">
               <span>创新创业</span>
-              <el-button class="button" text>更多<el-icon>
-                  <ArrowRightBold />
-                </el-icon></el-button>
+              <router-link :to="'/list' + 45"><el-button class="button" text>更多<el-icon>
+                    <ArrowRightBold />
+                  </el-icon></el-button></router-link>
             </div>
           </template>
           <div v-for="o in innovations" :key="o.article_id" class="text item">
@@ -128,9 +128,9 @@
           <template #header>
             <div class="card-header">
               <span>信息公开</span>
-              <el-button class="button" text>更多<el-icon>
-                  <ArrowRightBold />
-                </el-icon></el-button>
+              <router-link :to="'/list' + 17"><el-button class="button" text>更多<el-icon>
+                    <ArrowRightBold />
+                  </el-icon></el-button></router-link>
             </div>
           </template>
           <div v-for="o in information" :key="o.article_id" class="text item">
@@ -168,48 +168,48 @@ const researches = ref<Article[]>([])
 const academics = ref<Article[]>([])
 const innovations = ref<Article[]>([])
 const information = ref<Article[]>([])
-axios.get(url.baseUrl+"/api/news").then((result) => {
+axios.get(url.baseUrl + "/api/news").then((result) => {
   news.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/notice/1").then((result) => {
+axios.get(url.baseUrl + "/api/notice/1").then((result) => {
   notices1.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/notice/2").then((result) => {
+axios.get(url.baseUrl + "/api/notice/2").then((result) => {
   notices2.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/notice/3").then((result) => {
+axios.get(url.baseUrl + "/api/notice/3").then((result) => {
   notices3.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/notice/4").then((result) => {
+axios.get(url.baseUrl + "/api/notice/4").then((result) => {
   notices4.value = result.data
 }).catch((err) => {
   console.log('error')
 });
 // console.log(news)
-axios.get(url.baseUrl+"/api/researches").then((result) => {
+axios.get(url.baseUrl + "/api/researches").then((result) => {
   researches.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/academics").then((result) => {
+axios.get(url.baseUrl + "/api/academics").then((result) => {
   academics.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/innovations").then((result) => {
+axios.get(url.baseUrl + "/api/innovations").then((result) => {
   innovations.value = result.data
 }).catch((err) => {
   console.log('error')
 });
-axios.get(url.baseUrl+"/api/information").then((result) => {
+axios.get(url.baseUrl + "/api/information").then((result) => {
   information.value = result.data
 }).catch((err) => {
   console.log('error')
@@ -219,66 +219,66 @@ const activeName = ref('first')
 const handleClick = (tab: TabsPaneContext, event: Event) => { // 通知公告里面的tab切换点击事件
   console.log(tab, event)
 }
-const links =[
+const links = [
   {
-    index:1,
+    index: 1,
     title: '杭师大',
-    url:'https://www.hznu.edu.cn/'
+    url: 'https://www.hznu.edu.cn/'
   },
   {
-    index:2,
-    title:'信息公开',
-    url:'https://xxgk.hznu.edu.cn/'
+    index: 2,
+    title: '信息公开',
+    url: 'https://xxgk.hznu.edu.cn/'
   },
   {
-    index:3,
-    title:'科研系统',
-    url:'http://kyxt.hznu.edu.cn/'
+    index: 3,
+    title: '科研系统',
+    url: 'http://kyxt.hznu.edu.cn/'
   },
   {
-    index:4,
-    title:'人文社科',
-    url:'http://rwskc.hznu.edu.cn/'
+    index: 4,
+    title: '人文社科',
+    url: 'http://rwskc.hznu.edu.cn/'
   },
   {
-    index:5,
-    title:'教务处',
-    url:'https://jwc.hznu.edu.cn/'
+    index: 5,
+    title: '教务处',
+    url: 'https://jwc.hznu.edu.cn/'
   },
   {
-    index:6,
-    title:'就业网',
-    url:'http://career.hznu.edu.cn/'
+    index: 6,
+    title: '就业网',
+    url: 'http://career.hznu.edu.cn/'
   },
   {
-    index:7,
-    title:'计财处',
-    url:'https://jcc.hznu.edu.cn/'
+    index: 7,
+    title: '计财处',
+    url: 'https://jcc.hznu.edu.cn/'
   },
   {
-    index:8,
-    title:'人事处',
-    url:'https://rsc.hznu.edu.cn/'
+    index: 8,
+    title: '人事处',
+    url: 'https://rsc.hznu.edu.cn/'
   },
   {
-    index:9,
-    title:'科技处',
-    url:'https://kyc.hznu.edu.cn/kjc/index.shtml'
+    index: 9,
+    title: '科技处',
+    url: 'https://kyc.hznu.edu.cn/kjc/index.shtml'
   },
   {
-    index:10,
-    title:'团委',
-    url:'https://youth.hznu.edu.cn/'
+    index: 10,
+    title: '团委',
+    url: 'https://youth.hznu.edu.cn/'
   },
   {
-    index:9,
-    title:'遥感与地球科学研究院',
-    url:'http://ires.hznu.edu.cn/'
+    index: 9,
+    title: '遥感与地球科学研究院',
+    url: 'http://ires.hznu.edu.cn/'
   },
   {
-    index:10,
-    title:'浙江省城市湿地与区域变化研究重点实验室',
-    url:'http://uwrl.hznu.edu.cn/'
+    index: 10,
+    title: '浙江省城市湿地与区域变化研究重点实验室',
+    url: 'http://uwrl.hznu.edu.cn/'
   }
 ]
 </script>
@@ -378,17 +378,20 @@ img {
   /* position: absolute; */
   color: #999;
 }
-.links{
+
+.links {
   display: flex;
   flex-wrap: wrap;
   /* 删除标记 */
   list-style: none;
   padding-left: 0px;
 }
-.link{
+
+.link {
   margin-right: 10px;
 }
-.link a{
+
+.link a {
   color: #999;
   font-size: 14px;
   text-decoration: none;
