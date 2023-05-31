@@ -9,7 +9,7 @@
   <div class="container">
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-card class="box-card">
+        <el-card class="box-card" :body-style="{ height: '306px' }">
           <template #header>
             <div class="card-header">
               <span>新闻动态</span>
@@ -18,14 +18,16 @@
                 </el-icon></el-button>
             </div>
           </template>
-          <div v-for="o in news" :key="o.id" class="text item">
-            <div class="title">{{ o.title }}</div>
-            <div class="time">{{ o.time }}</div>
+
+          <div v-for="o in news" :key="o.article_id" class="text item">
+            <div class="title"><router-link :to="'/article' + o.article_id">{{
+              o.article_title }}</router-link></div>
+            <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card">
+        <el-card class="box-card" :body-style="{ height: '306px', paddingTop: '0px' }">
           <template #header>
             <div class="card-header">
               <span>通知公告</span>
@@ -34,16 +36,42 @@
                 </el-icon></el-button>
             </div>
           </template>
-          <div v-for="o in news" :key="o.id" class="text item">
-            <div class="title">{{ o.title }}</div>
-            <div class="time">{{ o.time }}</div>
-          </div>
+          <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+            <el-tab-pane label="综合" name="first">
+              <div v-for="o in notices1" :key="o.article_id" class="text item">
+                <div class="title"><router-link :to="'/article' + o.article_id">{{
+                  o.article_title }}</router-link></div>
+                <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="教学" name="second">
+              <div v-for="o in notices2" :key="o.article_id" class="text item">
+                <div class="title"><router-link :to="'/article' + o.article_id">{{
+                  o.article_title }}</router-link></div>
+                <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="科研" name="third">
+              <div v-for="o in notices3" :key="o.article_id" class="text item">
+                <div class="title"><router-link :to="'/article' + o.article_id">{{
+                  o.article_title }}</router-link></div>
+                <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="学校" name="fourth">
+              <div v-for="o in notices4" :key="o.article_id" class="text item">
+                <div class="title"><router-link :to="'/article' + o.article_id">{{
+                  o.article_title }}</router-link></div>
+                <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
+              </div>
+            </el-tab-pane>
+          </el-tabs>
         </el-card>
       </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-card class="box-card">
+        <el-card class="box-card" :body-style="{ height: '306px' }">
           <template #header>
             <div class="card-header">
               <span>科研成果</span>
@@ -52,14 +80,15 @@
                 </el-icon></el-button>
             </div>
           </template>
-          <div v-for="o in news" :key="o.id" class="text item">
-            <div class="title">{{ o.title }}</div>
-            <div class="time">{{ o.time }}</div>
+          <div v-for="o in researches" :key="o.article_id" class="text item">
+            <div class="title"><router-link :to="'/article' + o.article_id">{{
+              o.article_title }}</router-link></div>
+            <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card">
+        <el-card class="box-card" :body-style="{ height: '306px' }">
           <template #header>
             <div class="card-header">
               <span>学术动态</span>
@@ -68,16 +97,17 @@
                 </el-icon></el-button>
             </div>
           </template>
-          <div v-for="o in news" :key="o.id" class="text item">
-            <div class="title">{{ o.title }}</div>
-            <div class="time">{{ o.time }}</div>
+          <div v-for="o in academics" :key="o.article_id" class="text item">
+            <div class="title"><router-link :to="'/article' + o.article_id">{{
+              o.article_title }}</router-link></div>
+            <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
           </div>
         </el-card>
       </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-card class="box-card">
+        <el-card class="box-card" :body-style="{ height: '306px' }">
           <template #header>
             <div class="card-header">
               <span>创新创业</span>
@@ -86,14 +116,15 @@
                 </el-icon></el-button>
             </div>
           </template>
-          <div v-for="o in news" :key="o.id" class="text item">
-            <div class="title">{{ o.title }}</div>
-            <div class="time">{{ o.time }}</div>
+          <div v-for="o in innovations" :key="o.article_id" class="text item">
+            <div class="title"><router-link :to="'/article' + o.article_id">{{
+              o.article_title }}</router-link></div>
+            <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card">
+        <el-card class="box-card" :body-style="{ height: '306px' }">
           <template #header>
             <div class="card-header">
               <span>信息公开</span>
@@ -102,47 +133,162 @@
                 </el-icon></el-button>
             </div>
           </template>
-          <div v-for="o in news" :key="o.id" class="text item">
-            <div class="title">{{ o.title }}</div>
-            <div class="time">{{ o.time }}</div>
+          <div v-for="o in information" :key="o.article_id" class="text item">
+            <div class="title"><router-link :to="'/article' + o.article_id">{{
+              o.article_title }}</router-link></div>
+            <div class="time">{{ o.publish_time.substr(0, 10) }}</div>
           </div>
         </el-card>
       </el-col>
     </el-row>
+    <el-divider content-position="left">校内链接</el-divider>
+    <ul class="links">
+      <li v-for="o in links" class="link"><a :href="o.url">{{ o.title }}</a></li>
+    </ul>
   </div>
 </template>
 <script setup lang="ts">
+import type { TabsPaneContext } from 'element-plus'
+import axios from 'axios'
+import { ref } from 'vue'
 // 引入三张图
-import img1 from '../assets/images/banner1.jpg'
-import img2 from '../assets/images/banner2.jpg'
-import img3 from '../assets/images/banner3.jpg'
+const img1 = 'https://s2.loli.net/2023/05/23/Q3VLtbAN1S9y6HY.webp'
+const img2 = 'https://s2.loli.net/2023/05/23/jnPc1aU9KCHhxFm.webp'
+const img3 = 'https://s2.loli.net/2023/05/23/8JVSNGRcTOnXW2u.webp'
 // 创建一个数组，用于存放图片，数组可以用与于template
-
 const images = [img1, img2, img3]
-const news = [
-  { id: 1, title: '博物馆进校园——地图上的党史主题展览活动', time: '2023-05-18' },
-  { id: 2, title: '喜报|电子211班心理委员张梦婷获得校“十佳心理委员”', time: '2023-05-18' },
-  { id: 3, title: '信息学院召开第二届校友理事会换届大会', time: '2023-05-15' },
-  { id: 4, title: '喜报|我院团员青年谢文龙入选2022年度杭州市优秀共青团员', time: '2023-05-12' },
-  { id: 5, title: '享受运动乐趣，做全民健身的先行者————学院工会组织开展教职工共跳亚运曲目健身舞蹈活动', time: '2023-05-12' },
-  { id: 6, title: '我院学生在第四届长三角师范生教学基本功大赛中荣获一等奖', time: '2023-05-12' },
-  { id: 7, title: '我院顺利完成2019级师范生中小学教师资格考试（面试）工作', time: '2023-05-09' },
-  { id: 8, title: '学院2021年校级教改项目顺利通过验收检查', time: '2023-05-09' },
-  { id: 9, title: '“智能图形学与视觉前沿技术及行业应用”————CCF CAD&CG 第十五期 走进杭州师范大学', time: '2023-05-08' },
-]
-const notices = [
-  { id: 1, title: '博物馆进校园——地图上的党史主题展览活动', time: '2023-05-18' },
-  { id: 2, title: '喜报|电子211班心理委员张梦婷获得校“十佳心理委员”', time: '2023-05-18' },
-  { id: 3, title: '信息学院召开第二届校友理事会换届大会', time: '2023-05-15' },
-  { id: 4, title: '喜报|我院团员青年谢文龙入选2022年度杭州市优秀共青团员', time: '2023-05-12' },
-  { id: 5, title: '享受运动乐趣，做全民健身的先行者————学院工会组织开展教职工共跳亚运曲目健身舞蹈活动', time: '2023-05-12' },
-  { id: 6, title: '我院学生在第四届长三角师范生教学基本功大赛中荣获一等奖', time: '2023-05-12' },
-  { id: 7, title: '我院顺利完成2019级师范生中小学教师资格考试（面试）工作', time: '2023-05-09' },
-  { id: 8, title: '学院2021年校级教改项目顺利通过验收检查', time: '2023-05-09' },
-  { id: 9, title: '“智能图形学与视觉前沿技术及行业应用”————CCF CAD&CG 第十五期 走进杭州师范大学', time: '2023-05-08' },
+// 读取json文件
+import url from '../../config.json'
+const news = ref<Article[]>([])
+const notices1 = ref<Article[]>([])
+const notices2 = ref<Article[]>([])
+const notices3 = ref<Article[]>([])
+const notices4 = ref<Article[]>([])
+const researches = ref<Article[]>([])
+const academics = ref<Article[]>([])
+const innovations = ref<Article[]>([])
+const information = ref<Article[]>([])
+axios.get(url.baseUrl+"/api/news").then((result) => {
+  news.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/notice/1").then((result) => {
+  notices1.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/notice/2").then((result) => {
+  notices2.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/notice/3").then((result) => {
+  notices3.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/notice/4").then((result) => {
+  notices4.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+// console.log(news)
+axios.get(url.baseUrl+"/api/researches").then((result) => {
+  researches.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/academics").then((result) => {
+  academics.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/innovations").then((result) => {
+  innovations.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+axios.get(url.baseUrl+"/api/information").then((result) => {
+  information.value = result.data
+}).catch((err) => {
+  console.log('error')
+});
+const activeName = ref('first')
+
+const handleClick = (tab: TabsPaneContext, event: Event) => { // 通知公告里面的tab切换点击事件
+  console.log(tab, event)
+}
+const links =[
+  {
+    index:1,
+    title: '杭师大',
+    url:'https://www.hznu.edu.cn/'
+  },
+  {
+    index:2,
+    title:'信息公开',
+    url:'https://xxgk.hznu.edu.cn/'
+  },
+  {
+    index:3,
+    title:'科研系统',
+    url:'http://kyxt.hznu.edu.cn/'
+  },
+  {
+    index:4,
+    title:'人文社科',
+    url:'http://rwskc.hznu.edu.cn/'
+  },
+  {
+    index:5,
+    title:'教务处',
+    url:'https://jwc.hznu.edu.cn/'
+  },
+  {
+    index:6,
+    title:'就业网',
+    url:'http://career.hznu.edu.cn/'
+  },
+  {
+    index:7,
+    title:'计财处',
+    url:'https://jcc.hznu.edu.cn/'
+  },
+  {
+    index:8,
+    title:'人事处',
+    url:'https://rsc.hznu.edu.cn/'
+  },
+  {
+    index:9,
+    title:'科技处',
+    url:'https://kyc.hznu.edu.cn/kjc/index.shtml'
+  },
+  {
+    index:10,
+    title:'团委',
+    url:'https://youth.hznu.edu.cn/'
+  },
+  {
+    index:9,
+    title:'遥感与地球科学研究院',
+    url:'http://ires.hznu.edu.cn/'
+  },
+  {
+    index:10,
+    title:'浙江省城市湿地与区域变化研究重点实验室',
+    url:'http://uwrl.hznu.edu.cn/'
+  }
 ]
 </script>
 <style scoped>
+a {
+  /* 设置链接不变色 */
+  color: #000;
+  text-decoration: none;
+}
+
 .container {
   /* 居中 */
   margin: 0 auto;
@@ -170,20 +316,10 @@ const notices = [
   text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
-
 img {
   height: 50vh;
   width: 100%;
 }
-
-
 
 .el-row {
   margin-bottom: 20px;
@@ -226,22 +362,35 @@ img {
   /* 超出部分隐藏 */
   /* position: relative; */
   float: left;
-  width: 70%;
+  width: 80%;
 }
 
 .time {
   white-space: nowrap;
   float: right;
   font-size: 12px;
-  margin-left: 20%;
+  text-align: right;
+  /* margin-left: 10%; */
+  width: 20%;
   /* 使得文字靠下 */
   line-height: 20px;
   /* right: 100px; */
   /* position: absolute; */
   color: #999;
 }
-
-.box-card {
-  /* width: 480px; */
+.links{
+  display: flex;
+  flex-wrap: wrap;
+  /* 删除标记 */
+  list-style: none;
+  padding-left: 0px;
+}
+.link{
+  margin-right: 10px;
+}
+.link a{
+  color: #999;
+  font-size: 14px;
+  text-decoration: none;
 }
 </style>
