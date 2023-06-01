@@ -28,6 +28,7 @@ console.log(route.params.id)
 // 从config.json获取api的地址
 import url from '../../config.json'
 console.log(url.baseUrl)
+
 axios.get(url.baseUrl + "/article" + route.params.id).then((result) => {
   data.value = result.data[0]
   console.log(data.value.article_id)

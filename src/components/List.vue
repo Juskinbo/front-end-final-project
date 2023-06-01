@@ -1,17 +1,32 @@
 <template>
   <div class="list">
-    <div class="pagination-block">
-      <el-image style="height: 10vh;width: 100%;" src="https://s2.loli.net/2023/05/31/Hwr4ARUaF1zjMGo.png">
-      </el-image>
-      <ul>
-        <li class="article" v-for="o in list" :key="o.article_id">
-          <div class="title"><router-link :to="'/article' + o.article_id">{{ o.article_title }}</router-link>
-          </div>
-          <div class="time">{{ o.publish_time.substring(0, 10) }}</div>
-        </li>
+    <div class="left">
+      <ul class="links">
+        <li class="same-type-link" v-for="o in sameType" :key="o.category_id"><router-link
+            :to="'/list' + o.category_id">{{ o.category_name
+            }}</router-link></li>
       </ul>
-      <el-pagination layout="prev, pager, next" :total="total" :default-page-size="10" @current-change="pageChange" />
     </div>
+    <div class="center">
+      <div class="pagination-block">
+        <el-image style="height: 10vh;width: 100%;" src="https://s2.loli.net/2023/05/31/Hwr4ARUaF1zjMGo.png">
+        </el-image>
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/' }">{{ nowType?.category_name }}</el-breadcrumb-item>
+          
+      </el-breadcrumb>
+        <ul>
+          <li class="article" v-for="o in list" :key="o.article_id">
+            <div class="title"><router-link :to="'/article' + o.article_id">{{ o.article_title }}</router-link>
+            </div>
+            <div class="time">{{ o.publish_time.substring(0, 10) }}</div>
+          </li>
+        </ul>
+        <el-pagination layout="prev, pager, next" :total="total" :default-page-size="10" @current-change="pageChange" />
+      </div>
+    </div>
+    <div class="right"></div>
   </div>
 </template>
 <script setup lang="ts">
@@ -25,6 +40,8 @@ console.log(url.baseUrl)
 // ref定义data
 const data = ref<Article[]>([]) // 所有数据
 const list = ref<Article[]>([])// 实时数据，默认是第一页的数据
+const sameType = ref<Category[]>([])
+const nowType = ref<Category>()
 console.log(list.value)
 const total = ref(0)
 // 监听路由的变化
@@ -46,7 +63,14 @@ watch(
       }
     }).catch((err) => {
       console.log('error')
-    });
+    })
+    axios.get(url.baseUrl + "/type" + route.params.id).then((result) => {
+      sameType.value = result.data
+      console.log(sameType.value)
+      nowType.value = sameType.value.find(o => o.category_id === Number(route.params.id))
+    }).catch((err) => {
+      console.log('error')
+    })
   },
   { immediate: true }
 )
@@ -69,6 +93,13 @@ const pageChange = (val: number) => {
 
 </script>
 <style scoped>
+.list {
+  display: flex;
+  width: 100%;
+  /* 居中 */
+  justify-content: center;
+}
+
 a {
   text-decoration: none;
   color: #000;
@@ -78,19 +109,16 @@ a {
   justify-content: center;
 }
 
-.pagination-block {
-  width: 60%;
-}
-
 .pagination-block+.pagination-block {
   margin-top: 10px;
 }
 
 .pagination-block {
   margin-bottom: 16px;
+  width: 100%;
 }
 
-.list {
+.center {
   display: flex;
   flex-direction: column;
   /* text-align: center; */
@@ -98,10 +126,12 @@ a {
   /* margin: 0 auto; */
   justify-content: center;
   height: 100%;
+  width: 60%;
 }
 
 ul {
   padding-left: 0;
+  list-style: none;
 }
 
 .article {
@@ -120,13 +150,15 @@ ul {
   /* border-radius: 5px; */
   /* box-shadow: 0 0 10px #ccc; */
 }
-.title{
+
+.title {
   /* display: flex; */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 80%;
 }
+
 .time {
   /* 靠右 */
   margin-left: auto;
@@ -135,6 +167,28 @@ ul {
   text-overflow: ellipsis;
   font-size: 12px;
   color: #999;
+}
+
+.left {
+  list-style: none;
+  width: 20%;
+}
+
+.right {
+  width: 20%;
+}
+
+.same-type-link {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #ececec;
+  width: 55%;
+  display: inline-block;
+}
+
+.links {
+  text-align: center;
 }
 </style>
 

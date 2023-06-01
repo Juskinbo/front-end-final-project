@@ -7,3 +7,8 @@ interface Article {
   category_id: number
   publish_time: string
 }
+interface Category {
+  category_id: number
+  category_name: string
+  father_category_id: number
+}
